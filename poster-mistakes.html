@@ -1,0 +1,106 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>AIVA · Poster mistakes</title><style>@font-face{font-family:'Aiva Britannic';src:url('assets/fonts/britannic.ttf') format('truetype');font-weight:400;font-display:block}
+@font-face{font-family:'Aiva Bell';src:url('assets/fonts/bell.ttf') format('truetype');font-weight:400;font-display:block}
+@font-face{font-family:'Aiva Eras';src:url('assets/fonts/eras.ttf') format('truetype');font-weight:400;font-display:block}
+@font-face{font-family:'Aiva Abadi';src:url('assets/fonts/abadi.ttf') format('truetype');font-weight:400;font-display:block}
+@font-face{font-family:'Aiva ADLaM';src:url('assets/fonts/adlam.ttf') format('truetype');font-weight:400;font-display:block}
+@font-face{font-family:'Aiva Cascadia';src:url('assets/fonts/cascadia.ttf') format('truetype');font-weight:400;font-display:block}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;background:#f87724}body{overflow:hidden;color:#80350e;font-family:'Aiva Abadi',sans-serif}button{font:inherit;color:inherit}img{user-select:none;-webkit-user-drag:none}::selection{background:#ffe086;color:#173f62;text-shadow:none}[hidden]{display:none!important}
+#world{position:relative;width:100%;height:100dvh;overflow:hidden;isolation:isolate}#background{position:absolute;inset:0;overflow:hidden;pointer-events:none;user-select:none}#background-strip{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);width:300%;height:300%;animation:background-roll 96s linear infinite;will-change:transform}#background-strip span{background:url('assets/images/background.png') 0 0/100% 100% no-repeat}#background-strip span:nth-child(2),#background-strip span:nth-child(8){transform:scaleX(-1)}#background-strip span:nth-child(4),#background-strip span:nth-child(6){transform:scaleY(-1)}#background-strip span:nth-child(5){transform:scale(-1,-1)}
+#scene{position:absolute;left:50%;top:50%;width:960px;height:540px;transform:translate(-50%,-50%) scale(var(--scale,1));transform-origin:center}#game-layer{position:absolute;inset:0}p,h1,h2{margin:0;font-weight:400}.text{user-select:text;-webkit-user-select:text}.brit{font-family:'Aiva Britannic',sans-serif;letter-spacing:3px}.mono{font-family:'Aiva Cascadia',monospace;letter-spacing:3px}.soft-shadow{text-shadow:1.591px 1.591px 3px rgba(0,0,0,.43137)}.picture{position:absolute;pointer-events:none}.emoji{font-family:'Segoe UI Emoji','Apple Color Emoji',sans-serif;letter-spacing:0}
+#dialogue{position:absolute;left:0;top:257px;width:960px;height:283px;z-index:20}#dialogue-art{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}#dialogue-text{position:absolute;left:113.54px;top:168.55px;width:680px;font-size:20px;line-height:24px;white-space:normal}#next{position:absolute;left:758.59px;top:226px;border:0;padding:0;background:none;display:flex;align-items:flex-start;gap:7.2px;cursor:pointer;min-height:30px}#next img{width:27.91px;height:27.91px;pointer-events:none}#next-label{padding-top:3.6px;font-family:'Aiva Bell',serif;font-size:16px;line-height:19.2px;letter-spacing:3px;white-space:nowrap;user-select:text}#next:focus-visible{outline:2px solid #80350e;outline-offset:5px}#next:hover img{transform:translate(2px,2px)}#dialogue.long #next{top:226px}
+#learning-layer{position:absolute;inset:0;z-index:10}.learning-board{position:absolute;left:215.35px;top:-7.51px;width:529.31px;height:419.60px;pointer-events:none;filter:saturate(1.6);transform:rotate(5deg) scale(1);transform-origin:50% 50%}#learning-points{position:absolute;left:338px;top:126px;width:320px;padding-left:24px;font-size:18px;line-height:32.4px;color:#fbe3d6}#learning-points li{padding-left:4px}
+#feedback{position:absolute;inset:0;pointer-events:none;z-index:50}.particle{position:absolute;pointer-events:none;width:var(--size);height:auto;will-change:transform,opacity}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}.rock{animation:rock 5.5s ease-in-out infinite}.bob{animation:bob 4s ease-in-out infinite}
+@keyframes background-roll{from{transform:translate3d(0,0,0)}to{transform:translate3d(-66.6666666667%,-66.6666666667%,0)}}@keyframes bob{0%,100%{transform:translateY(6px)}50%{transform:translateY(-12px)}}@keyframes rock{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(7deg)}}
+#dialogue{pointer-events:none}#dialogue-text,#next{pointer-events:auto}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+
+
+#poster-title{position:absolute;left:210px;top:32px;font-size:23px;line-height:32px;letter-spacing:1.5px;color:#fff0da}
+#poster-guide{position:absolute;left:80px;top:26px;width:112px;height:80px;object-fit:contain}
+#poster-context{position:absolute;left:205px;top:82px;width:215px;font-size:17px;line-height:23px;letter-spacing:1px;color:#fff0da}
+#message-label{position:absolute;left:59px;top:180px;font-size:18px;letter-spacing:1.5px;color:#fff0da}
+#brief{position:absolute;left:17px;top:205px;width:404px;height:294px}#brief>img{width:100%;height:100%;pointer-events:none}#brief-text{position:absolute;left:43px;top:29px;width:318px;font-size:17px;line-height:26px;letter-spacing:1px;user-select:text}
+#poster-wrap{position:absolute;box-shadow:1px 3px 6px #6b300c55}#poster-base{display:block;width:100%;height:100%;pointer-events:none}#patches{position:absolute;inset:0;pointer-events:none}.error-layer{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;transition:opacity .25s ease-out}.error-layer.found{opacity:0}
+#hotspots{position:absolute;inset:0;pointer-events:none}.hotspot{position:absolute;border:0;padding:0;background:transparent;cursor:pointer;pointer-events:auto}.hotspot:focus-visible{outline:2px dashed #173f62;outline-offset:2px}.hotspot[aria-disabled="true"]{cursor:default}
+#poster-count{position:absolute;right:42px;top:24px;font-family:'Aiva ADLaM';font-size:20px;color:#fff0da}#correct-note{position:absolute;left:450px;top:510px;width:490px;text-align:center;font-size:16px;line-height:21px;letter-spacing:.7px;color:#fff0da}
+#learning-layer .learning-board{left:160px;top:0;width:640px;height:500px;filter:none}#takeaway{position:absolute;left:305px;top:153px;width:370px;font-size:23px;line-height:34px;letter-spacing:1px;color:#fff3d6;text-shadow:1px 1px 2px #344627}
+#retry{position:absolute;left:380px;top:450px;width:200px;padding:13px 20px;border:2px solid #80350e;background:#ffe3af;color:#80350e;border-radius:8px;font-family:'Aiva Britannic';font-size:22px;cursor:pointer}#retry:focus-visible{outline:3px solid white;outline-offset:4px}
+#world[data-phase="loading"] #poster-wrap{visibility:hidden}
+
+#poster-context,#message-label{display:none}
+#brief{left:10px;top:135px;width:490px;height:375px}
+#brief-text{left:64px;top:45px;width:362px;font-size:21px;line-height:30px;letter-spacing:1px}
+#poster-count{right:12px;top:43px;font-size:20px}
+</style></head><body><script>(function(){
+ 'use strict';const A=window.AIVA={};A.asset=name=>'assets/images/'+name;A.$=id=>document.getElementById(id);A.reduced=matchMedia('(prefers-reduced-motion:reduce)');
+ A.mount=function(){
+  document.body.innerHTML=`<main id="world" aria-label="AIVA’s AI playground"><div id="background" aria-hidden="true"><div id="background-strip">${'<span></span>'.repeat(9)}</div></div><div id="scene"><div id="game-layer"></div><section id="learning-layer" hidden><img class="learning-board" src="${A.asset('blackboard.png')}" alt=""><ul id="learning-points" class="brit soft-shadow"></ul></section><section id="dialogue" aria-label="AIVA’s dialogue" hidden><img id="dialogue-art" src="${A.asset('dialogue.png')}" alt="AIVA beside a cream dialogue box"><p id="dialogue-text" class="text brit"></p><button id="next"><img src="${A.asset('cursor.png')}" alt=""><span id="next-label">click for next…</span></button></section><div id="feedback" aria-hidden="true"></div></div><p id="announcement" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p></main>`;
+  A.world=A.$('world');A.scene=A.$('scene');A.game=A.$('game-layer');
+  function resize(){A.world.style.setProperty('--scale',Math.min(innerWidth/960,innerHeight/540))}addEventListener('resize',resize);resize();
+  let down=null,dragged=false;
+  A.world.addEventListener('pointerdown',e=>{down={x:e.clientX,y:e.clientY};dragged=false});
+  A.world.addEventListener('pointermove',e=>{if(down&&e.buttons&&Math.hypot(e.clientX-down.x,e.clientY-down.y)>5)dragged=true});
+  A.wasSelection=e=>e?.detail!==0&&(dragged||!getSelection().isCollapsed);
+  document.fonts.ready.then(()=>A.world.dataset.fonts='ready');
+  addEventListener('keydown',e=>{if(e.key.toLowerCase()==='f'&&!e.ctrlKey&&!e.altKey&&!e.metaKey){if(document.fullscreenElement)document.exitFullscreen?.();else A.world.requestFullscreen?.().catch(()=>{})}});
+ };
+ let notice=0;A.announce=text=>{const n=++notice;A.$('announcement').textContent='';setTimeout(()=>{if(n===notice)A.$('announcement').textContent=text},20)};
+ A.point=(e,el)=>{const r=A.scene.getBoundingClientRect(),s=r.width/960,b=el.getBoundingClientRect();return e&&e.detail!==0?{x:(e.clientX-r.left)/s,y:(e.clientY-r.top)/s}:{x:(b.left+b.width/2-r.left)/s,y:(b.top+b.height/2-r.top)/s}};
+ // Distribute speech-bubble lines over the same readable vertical area.
+ A.spaceBubble=el=>{el.style.lineHeight='24px';const lines=Math.max(1,Math.round(el.offsetHeight/24));el.style.lineHeight=(180/lines)+'px'};
+ A.bindAction=(el,action)=>{el.addEventListener('click',e=>{if(!A.wasSelection(e))action(e)});if(el.tagName!=='BUTTON')el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();action({detail:0})}})};
+})();
+
+;
+(function(A){
+ const particle=(kind,p,size,frames,duration)=>{const img=document.createElement('img');img.src=A.asset(kind+'.png');img.alt='';img.className='particle '+kind;img.dataset.originX=p.x;img.dataset.originY=p.y;img.style.cssText=`left:${p.x}px;top:${p.y}px;--size:${size}px`;A.$('feedback').append(img);if(A.reduced.matches){img.style.transform='translate(-50%,-50%)';setTimeout(()=>img.remove(),600);return}img.animate(frames,{duration,easing:'cubic-bezier(.16,.7,.25,1)',fill:'forwards'}).finished.then(()=>img.remove()).catch(()=>img.remove())};
+ A.effects={clear(){A.$('feedback').replaceChildren()},cross(p){particle('cross',p,39,[{opacity:0,transform:'translate(-50%,-50%) scale(.15)'},{opacity:1,transform:'translate(-50%,-50%) scale(1.22)',offset:.24},{opacity:1,transform:'translate(-50%,-50%) scale(1)',offset:.6},{opacity:0,transform:'translate(-50%,-58%) scale(.82)'}],820)},sparkle(p){for(let i=0;i<(A.reduced.matches?1:9);i++){const angle=i/9*Math.PI*2-.6,distance=35+i%3*16,dx=Math.cos(angle)*distance,dy=Math.sin(angle)*distance;particle('sparkle',p,16+i%3*5,[{opacity:0,transform:'translate(-50%,-50%) scale(.1)'},{opacity:1,transform:`translate(-50%,-50%) translate(${dx*.28}px,${dy*.28}px) scale(1)`,offset:.24},{opacity:.95,transform:`translate(-50%,-50%) translate(${dx*.78}px,${dy*.78}px) scale(.8)`,offset:.65},{opacity:0,transform:`translate(-50%,-50%) translate(${dx}px,${dy+8}px) scale(.1)`}],850+i%3*90)}}};
+})(AIVA);
+
+;
+AIVA.posterRounds=[
+ {id:'birthday',title:'Birthday party',size:[1176,1338],message:"Hey! Please make a party poster for my girl Ella — she’s turning 8! It’s this Saturday at 4 PM. Pop two red balloons up top and a big cake with 8 candles. We’re at 10 Maple Road.",placement:[550,92,380,432.35],
+  errors:[
+   {id:'name',label:'Birthday name',answer:'Ella',regions:[[402,433,382,135]]},
+   {id:'balloons',label:'Balloon colours',answer:'Two red balloons',regions:[[56,148,209,275],[910,145,210,275]]},
+   {id:'time',label:'Party time',answer:'4 PM',regions:[[871,651,211,120]]},
+   {id:'candles',label:'Birthday candles',answer:'8 candles',regions:[[420,678,397,183]]}
+  ]},
+ {id:'cat',title:'Missing cat',size:[275,614],message:"Hello, I’m really worried — my cat Milo has gone missing. He’s grey with a blue collar. I’m offering a $50 reward. Please call me on 8234 5678.",placement:[590,90,197,440],
+  errors:[
+   {id:'title',label:'Missing animal title',answer:'LOST CAT',regions:[[16,86,246,82]]},
+   {id:'colour',label:'Animal colour',answer:'Grey cat',regions:[[36,168,219,270]],exclude:[[83,280,104,27]]},
+   {id:'collar',label:'Collar colour',answer:'Blue collar',regions:[[83,280,104,27]]},
+   {id:'reward',label:'Reward amount',answer:'$50',regions:[[23,447,223,43]]}
+  ]},
+ {id:'fair',title:'School Fun Fair',size:[839,502],message:"Good morning! We need a poster for our School Fun Fair. It’s on Friday, 10 AM to 3 PM, and entry is $3. Please add a yellow sun and a red striped tent.",placement:[515,164,430,257.28],
+  errors:[
+   {id:'sun',label:'Sun colour',answer:'Yellow sun',regions:[[48,5,147,157]]},
+   {id:'tent',label:'Tent colour',answer:'Red striped tent',regions:[[172,169,321,211]]},
+   {id:'hours',label:'Fair opening hours',answer:'10 AM–3 PM',regions:[[528,267,242,41]]},
+   {id:'entry',label:'Entry price',answer:'$3',regions:[[556,309,176,43]]}
+  ]}
+];
+
+;
+(function(A){
+ 'use strict';A.mount();const $=A.$;A.game.innerHTML=`<h1 id="poster-title" class="brit soft-shadow">Click on the mistakes in AIVA’s poster!</h1><img id="poster-guide" class="bob" src="${A.asset('aiva-plain.png')}" alt="AIVA"><p id="poster-context" class="brit soft-shadow">AIVA made a poster.<br>Compare it with the message and click the mistakes.</p><h2 id="message-label" class="brit soft-shadow">The original message</h2><section id="brief"><img src="${A.asset('bubble.png')}" alt=""><p id="brief-text" class="mono"></p></section><div id="poster-count" aria-live="polite">0 / 4</div><section id="poster-wrap" aria-label="AIVA’s poster"><img id="poster-base" alt=""><div id="patches"></div><div id="hotspots"></div></section><p id="correct-note" class="brit" aria-live="polite"></p>`;
+ $('learning-layer').innerHTML=`<img class="learning-board" src="${A.asset('blackboard.png')}" alt=""><p id="takeaway" class="brit">AI can help you accomplish many tasks, but make sure you double check its work!</p><button id="retry">Try again</button>`;
+ let round,previous=-1,found=new Set(),phase='loading',token=0,timer;const layers=new Map();const setPhase=p=>{phase=p;A.world.dataset.phase=p};
+ const contains=(r,x,y)=>x>=r[0]&&x<=r[0]+r[2]&&y>=r[1]&&y<=r[1]+r[3];
+ function targetAt(x,y){return round.errors.find(e=>e.regions.some(r=>contains(r,x,y))&&!(e.exclude||[]).some(r=>contains(r,x,y)))}
+ function load(src){return new Promise((resolve,reject)=>{const im=new Image();im.onload=()=>resolve(im);im.onerror=()=>reject(Error('Unable to load '+src));im.src=src})}
+ function drawLayer(error,bad){const canvas=document.createElement('canvas');canvas.width=round.size[0];canvas.height=round.size[1];canvas.className='error-layer';canvas.dataset.error=error.id;canvas.setAttribute('aria-hidden','true');const ctx=canvas.getContext('2d');ctx.beginPath();for(const r of error.regions)ctx.rect(...r);for(const r of error.exclude||[])ctx.rect(...r);ctx.clip('evenodd');ctx.drawImage(bad,0,0,...round.size);$('patches').append(canvas);layers.set(error.id,canvas)}
+ function correct(error,e,el){if(phase!=='play'||found.has(error.id)||A.wasSelection(e))return;found.add(error.id);const layer=layers.get(error.id);layer.classList.add('found');setTimeout(()=>{layer.hidden=true},280);for(const b of document.querySelectorAll(`[data-error="${error.id}"].hotspot`)){b.setAttribute('aria-disabled','true');b.setAttribute('aria-label',error.label+': corrected to '+error.answer)}
+ $('poster-count').textContent=found.size+' / 4';$('correct-note').textContent=error.answer;$('poster-wrap').setAttribute('aria-label',round.title+' poster. '+found.size+' of 4 mistakes corrected.');A.effects.sparkle(A.point(e,el));A.announce(error.label+' corrected: '+error.answer);if(found.size===4){setPhase('finishing');timer=setTimeout(finish,1250)}}
+ function finish(){setPhase('complete');A.game.hidden=true;$('learning-layer').hidden=false;A.effects.clear();$('retry').focus()}
+ async function start(){clearTimeout(timer);const n=++token;setPhase('loading');found=new Set();layers.clear();A.effects.clear();A.game.hidden=false;$('learning-layer').hidden=true;$('poster-count').textContent='0 / 4';$('correct-note').textContent='';
+ const random=crypto.getRandomValues(new Uint32Array(1))[0];let index=random%A.posterRounds.length;if(index===previous)index=(index+1)%A.posterRounds.length;previous=index;round=A.posterRounds[index];A.world.dataset.round=round.id;$('brief-text').textContent=round.message;
+ const box=$('poster-wrap');box.style.cssText=`left:${round.placement[0]}px;top:${round.placement[1]}px;width:${round.placement[2]}px;height:${round.placement[3]}px`;box.setAttribute('aria-label',round.title+' poster. Find four mistakes.');$('patches').replaceChildren();$('hotspots').replaceChildren();
+ const paths=['correct','mistakes'].map(s=>'assets/posters/'+round.id+'-'+s+'.png');const [good,bad]=await Promise.all(paths.map(load));if(n!==token)return;$('poster-base').src=good.src;$('poster-base').alt=round.title+' poster';await $('poster-base').decode();
+ for(const error of round.errors){drawLayer(error,bad);for(const r of error.regions){const button=document.createElement('button');button.className='hotspot';button.dataset.error=error.id;button.setAttribute('aria-label','Check '+error.label.toLowerCase());button.style.cssText=`left:${r[0]/round.size[0]*100}%;top:${r[1]/round.size[1]*100}%;width:${r[2]/round.size[0]*100}%;height:${r[3]/round.size[1]*100}%`;button.addEventListener('click',e=>{if(e.detail===0){e.stopPropagation();correct(error,e,button)}});$('hotspots').append(button)}}setPhase('play')}
+ $('poster-wrap').addEventListener('click',e=>{if(phase!=='play'||A.wasSelection(e))return;const b=$('poster-wrap').getBoundingClientRect(),x=(e.clientX-b.left)/b.width*round.size[0],y=(e.clientY-b.top)/b.height*round.size[1],error=targetAt(x,y);if(error)correct(error,e,e.target);else{A.effects.cross(A.point(e,$('poster-wrap')));A.announce('Compare that detail with the message and try again.')}});
+ function fail(e){console.error(e);setPhase('error');$('correct-note').textContent='Please refresh to load the posters.'}
+ $('retry').addEventListener('click',()=>start().catch(fail));A.posterSnapshot=()=>({phase,round:round?.id,found:[...found],errors:round?.errors.map(e=>({id:e.id,regions:e.regions,exclude:e.exclude})),size:round?.size});start().catch(fail);
+})(AIVA);
+</script></body></html>
