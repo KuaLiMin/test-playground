@@ -111,7 +111,43 @@ AIVA.posterRounds=[
  let round,previous=-1,found=new Set(),phase='loading',token=0,timer;const layers=new Map();const setPhase=p=>{phase=p;A.world.dataset.phase=p};
  const contains=(r,x,y)=>x>=r[0]&&x<=r[0]+r[2]&&y>=r[1]&&y<=r[1]+r[3];
  function inOutline(points,x,y){let inside=false;for(let i=0,j=points.length-1;i<points.length;j=i++){const [ax,ay]=points[i],[bx,by]=points[j];if((ay>y)!==(by>y)&&x<(bx-ax)*(y-ay)/(by-ay)+ax)inside=!inside}return inside}
- function targetAt(x,y){return round.errors.find(e=>e.hitAreas.some(p=>inOutline(p,x,y))&&!(e.excludeHitAreas||[]).some(p=>inOutline(p,x,y)))}
+ const clickRadius = 10; // CSS pixels measured on the displayed poster.
+
+ function edgeDistanceSquared(points, x, y, scaleX, scaleY) {
+   let closest = Infinity;
+   for (let i = 0, j = points.length - 1; i < points.length; j = i++) {
+     const ax = (points[j][0] - x) * scaleX;
+     const ay = (points[j][1] - y) * scaleY;
+     const dx = (points[i][0] - points[j][0]) * scaleX;
+     const dy = (points[i][1] - points[j][1]) * scaleY;
+     const lengthSquared = dx * dx + dy * dy;
+     const t = lengthSquared ? Math.max(0, Math.min(1, -(ax * dx + ay * dy) / lengthSquared)) : 0;
+     closest = Math.min(closest, (ax + t * dx) ** 2 + (ay + t * dy) ** 2);
+   }
+   return closest;
+ }
+
+ function targetAt(x, y, bounds) {
+   const scaleX = bounds.width / round.size[0];
+   const scaleY = bounds.height / round.size[1];
+   let nearest;
+   let best = Infinity;
+   for (const error of round.errors) {
+     const inside = error.hitAreas.some(shape => inOutline(shape, x, y));
+     const holes = (error.excludeHitAreas || []).filter(shape => inOutline(shape, x, y));
+     if (inside && !holes.length) return error;
+     if (found.has(error.id)) continue;
+     const edges = inside ? holes : error.hitAreas;
+     for (const shape of edges) {
+       const distance = edgeDistanceSquared(shape, x, y, scaleX, scaleY);
+       if (distance <= clickRadius ** 2 && distance < best) {
+         best = distance;
+         nearest = error;
+       }
+     }
+   }
+   return nearest;
+ }
  function load(src){return new Promise((resolve,reject)=>{const im=new Image();im.onload=()=>resolve(im);im.onerror=()=>reject(Error('Unable to load '+src));im.src=src})}
  function drawLayer(error,art){art.className='error-layer';art.dataset.error=error.id;art.alt='';art.setAttribute('aria-hidden','true');$('patches').append(art);layers.set(error.id,art)}
  function correct(error,e,el){if(phase!=='play'||found.has(error.id)||A.wasSelection(e))return;found.add(error.id);const layer=layers.get(error.id);layer.classList.add('found');setTimeout(()=>{layer.hidden=true},280);for(const b of document.querySelectorAll(`[data-error="${error.id}"].hotspot`)){b.setAttribute('aria-disabled','true');b.setAttribute('aria-label',error.label+': corrected to '+error.answer)}
@@ -122,7 +158,7 @@ AIVA.posterRounds=[
  const box=$('poster-wrap');box.style.cssText=`left:${round.placement[0]}px;top:${round.placement[1]}px;width:${round.placement[2]}px;height:${round.placement[3]}px`;box.setAttribute('aria-label',round.title+' poster. Find four mistakes.');$('patches').replaceChildren();$('hotspots').replaceChildren();
  const paths=['assets/posters/'+round.id+'-correct.png',...round.errors.map(e=>'assets/posters/'+round.id+'-'+e.id+'-overlay.svg')];const [good,...overlays]=await Promise.all(paths.map(load));if(n!==token)return;$('poster-base').src=good.src;$('poster-base').alt=round.title+' poster';await $('poster-base').decode();
  for(const error of round.errors){drawLayer(error,overlays[round.errors.indexOf(error)]);for(const outline of error.hitAreas){const xs=outline.map(p=>p[0]),ys=outline.map(p=>p[1]);const r=[Math.min(...xs),Math.min(...ys),Math.max(...xs)-Math.min(...xs),Math.max(...ys)-Math.min(...ys)];const button=document.createElement('button');button.className='hotspot';button.dataset.error=error.id;button.setAttribute('aria-label','Check '+error.label.toLowerCase());button.style.cssText=`left:${r[0]/round.size[0]*100}%;top:${r[1]/round.size[1]*100}%;width:${r[2]/round.size[0]*100}%;height:${r[3]/round.size[1]*100}%`;button.style.clipPath='polygon('+outline.map(p=>((p[0]-r[0])/r[2]*100)+'% '+((p[1]-r[1])/r[3]*100)+'%').join(',')+')';button.addEventListener('click',e=>{if(e.detail===0){e.stopPropagation();correct(error,e,button)}});$('hotspots').append(button)}}setPhase('play')}
- $('poster-wrap').addEventListener('click',e=>{if(phase!=='play'||A.wasSelection(e))return;const b=$('poster-wrap').getBoundingClientRect(),x=(e.clientX-b.left)/b.width*round.size[0],y=(e.clientY-b.top)/b.height*round.size[1],error=targetAt(x,y);if(error)correct(error,e,e.target);else{A.effects.cross(A.point(e,$('poster-wrap')));A.announce('Compare that detail with the message and try again.')}});
+ $('poster-wrap').addEventListener('click',e=>{if(phase!=='play'||A.wasSelection(e))return;const b=$('poster-wrap').getBoundingClientRect(),x=(e.clientX-b.left)/b.width*round.size[0],y=(e.clientY-b.top)/b.height*round.size[1],error=targetAt(x,y,b);if(error)correct(error,e,e.target);else{A.effects.cross(A.point(e,$('poster-wrap')));A.announce('Compare that detail with the message and try again.')}});
  function fail(e){console.error(e);setPhase('error');$('correct-note').textContent='Please refresh to load the posters.'}
  $('retry').addEventListener('click',()=>start().catch(fail));A.posterSnapshot=()=>({phase,round:round?.id,found:[...found],errors:round?.errors.map(e=>({id:e.id,regions:e.regions,exclude:e.exclude})),size:round?.size});start().catch(fail);
 })(AIVA);
